@@ -205,7 +205,7 @@ Number of frames an occluded object can remain unmatched before being marked as 
 IOU suppression threshold used to avoid initializing duplicate tracks from overlapping detections.
 
 ### 📦 Output Structure 
-After running each .sh file (e.g., run_mot17.sh or run_mot20.sh), the full set of tracking results will be saved in:
+After running each .sh file (e.g., `run_mot17.sh` or `run_mot20.sh`), the full set of tracking results will be saved in:
 ```shell
 ./YOLOX_outputs/<EXPERIMENT_NAME>/runX/track_results/
 ```
@@ -220,17 +220,57 @@ To reproduce the best performance reported in our paper and in MOT Challenge ser
 This is done by editing the corresponding JSON config file in `./configs/` with sequence-specific values (e.g., `track_thresh`, `match_thresh`, etc.).
 
 ## Obtain MOTA /IDS/ HOTA and other evaluation
+To evaluate tracking performance using standard metrics such as MOTA, IDF1, HOTA, FP, FN, and ID switches, we use the [TrackEval repository](https://github.com/JonathonLuiten/TrackEval).
 
-### MOT17
-```shell
-cd <home>
-python .\\TrackEval\\hotaPreparation.py -d .\\YOLOX_outputs\\yolox_x_mix_det\\track_results\\MOT17-02-DPM.txt -g .\\YOLOX_outputs\\gt\\MOT17\\02-DPM\\gt.txt
-python .\\TrackEval\\scripts\\run_mot_challenge.py --USE_PARALLEL False --METRICS CLEAR --BENCHMARK MOT15
+### 🧪 Run Evaluation with run_eval.sh
+After running your tracking experiments, simply execute:
+```bash
+run_eval.sh
+```
+This script will evaluate the results produced in each:
+```bash
+./YOLOX_outputs/<EXPERIMENT_NAME>/runX/track_results/
 ```
 
-### MOT20
+* Each runX corresponds to a different tracking configuration file used during tracking.
+
+* The results from TrackEval will be saved under the same `track_results/` directory.
+
+* These include `.txt` summary files containing the full set of metrics
+
+### ⚙️ Understanding run_eval.sh Configuration
+The `run_eval.sh` script is used to evaluate the tracking results using TrackEval.
+It defines several key variables that control what experiment to evaluate, where the predictions are located, and where the ground-truth lives. In this bash file, as example, we have:
 ```shell
-cd <home>
-python .\\TrackEval\\hotaPreparation.py -d .\\YOLOX_outputs\\yolox_x_mix_mot20_ch\\track_results\\MOT20-01.txt -g .\\YOLOX_outputs\\gt\\MOT20\\01\\gt.txt
-python .\\TrackEval\\scripts\\run_mot_challenge.py --USE_PARALLEL False --METRICS CLEAR --BENCHMARK MOT15
+TRACKEVAL_ROOT="${SCRIPT_DIR}/TrackEval"
+BENCHMARK="MOT15"
+USE_PARALLEL="False"
+
+TRACK_SCRIPT="tools/track.py"
+HOTA_PREP="${TRACKEVAL_ROOT}/hotaPreparation.py"
+RUN_MOT="${TRACKEVAL_ROOT}/scripts/run_mot_challenge.py"
+path_folder="${TRACKEVAL_ROOT}/data/"
+EXP_DIR="${OUTPUTS_ROOT}/${EXPERIMENT_NAME}"
+
+GT_ROOT="${SCRIPT_DIR}/gt/MOT17"
+RESULTS_DIR="${SCRIPT_DIR}/YOLOX_outputs/yolox_x_mix_det/run002/track_results"
 ```
+* `TRACKEVAL_ROOT`: Path to the local clone of the TrackEval
+ repository.
+
+* `BENCHMARK`: The benchmark to evaluate against. Must match the format expected by TrackEval.
+
+* `USE_PARALLEL`: Set to "`True`" to enable parallel evaluation over multiple sequences.
+
+* `TRACK_SCRIPT`: (Optional) Path to your internal tracking script, if reused during eval.
+
+* `HOTA_PREP`: Path to the script that prepares outputs for HOTA evaluation.
+
+* `RUN_MOT`: Path to TrackEval’s main evaluation script (`run_mot_challenge.py`).
+
+* `path_folder`: Internal path for TrackEval data structures.
+
+* `GT_ROOT`: Path to the directory containing ground truth annotations in `MOT` format. Update this path to point to the correct benchmark dataset.
+
+* `RESULTS_DIR`: Directory containing tracking result `.txt` files (in `MOT` format).
+
