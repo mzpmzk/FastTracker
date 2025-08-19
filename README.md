@@ -297,7 +297,7 @@ This post-processing step is optional and meant for offline use only — it is n
 
 ## Demo
 
-![image](./figs/fasttrack_benchmark.jpg)
+![image](./figs/fasttrack_occ_enlarge_bb.jpg)
 
 Simply run:
 
