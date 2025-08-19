@@ -96,6 +96,25 @@ python tools\\convert_mot20_to_coco.py
 (For FastTracker benchmark use `convert_mot17_to_coco.py` to make annotations. There you need to change
 `DATA_PATH = 'datasets/mot'` line.)
 
+## Pretrained Weights
+
+To use FastTracker's default models for MOT17 and MOT20 benchmarks, download the following pretrained weights from the [ByteTrack repository](https://github.com/ifzhang/ByteTrack):
+
+- `bytetrack_x_mot17.pth.tar`  
+- `bytetrack_x_mot20.pth.tar`  
+
+Place both files into the `./pretrained/` directory.
+
+For the **FastTrack benchmark**, which includes multiple object classes beyond pedestrians, you need to retrain the YOLOX backbone for multi-class detection. 
+
+The FastTrack benchmark uses the standard MOT format, where each `gt/gt.txt` file already provides frame-level detections with object class annotations. To train a detector:
+
+1. You **do not need to extract frames manually**—the frame-wise detections are already specified.
+2. Simply **ignore the track IDs** in `gt.txt`, as detector training requires only bounding boxes and class labels.
+3. Convert the annotations to COCO-style format using the provided class and bounding box info.
+4. Use the ByteTrack training scripts to retrain YOLOX with the new annotations.
+
+This enables FastTracker to detect and track multiple object types effectively in complex traffic environments.
 
 ## Tracking
 
