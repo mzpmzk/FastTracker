@@ -274,3 +274,23 @@ RESULTS_DIR="${SCRIPT_DIR}/YOLOX_outputs/yolox_x_mix_det/run002/track_results"
 
 * `RESULTS_DIR`: Directory containing tracking result `.txt` files (in `MOT` format).
 
+## Post-processing with Gaussian Smoothing Interpolation (GSI)
+After running your tracking experiments, you can optionally apply Gaussian Smoothing Interpolation to refine the results. We provide a tool for this:
+
+```bash
+tools/GSI.py
+```
+To run GSI on your saved tracking results:
+```bash
+python tools/GSI.py \
+    --loadpath "./YOLOX_outputs/experiment_name/runx/track_results" \
+    --savepath "./YOLOX_outputs/experiment_name/runx/track_results_gsi"
+```
+
+* `--loadpath`: Path to the directory containing the original tracking result `.txt` files. These are generated after running `run_mot17.sh` or `run_mot20.sh`.
+
+* `--savepath`: Output directory where the smoothed results will be saved.
+
+* The smoothed results will maintain `MOT` format, and can be used directly for evaluation.
+
+This post-processing step is optional and meant for offline use only — it is not applicable in real-time systems.
