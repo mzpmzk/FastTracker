@@ -14,7 +14,7 @@
 
 
 <div align="center">
-  <img src="./figs/tracker_radar.jpg" alt="Image main" width="70%" style="margin: 1%;">
+  <img src="./figs/tracker_radar.jpg" alt="Image main" width="30%" style="margin: 1%;">
 </div>
 
 FastTracker is a general-purpose multi-object tracking framework designed for complex traffic scenes. Unlike traditional pedestrian-focused trackers, FastTracker supports diverse object types—especially vehicles—and maintains identity through heavy occlusion and complex motion. It combines an occlusion-aware re-identification module with road-structure-aware tracklet refinement, leveraging semantic priors like lanes and crosswalks for better trajectory accuracy. We also release a new benchmark dataset tailored for high-density vehicle tracking. FastTracker achieves strong performance across multiple benchmarks and is suitable for real-world deployment.
