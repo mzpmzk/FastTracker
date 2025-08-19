@@ -105,7 +105,7 @@ To use FastTracker's default models for MOT17 and MOT20 benchmarks, download the
 
 Place both files into the `./pretrained/` directory.
 
-For the **FastTrack benchmark**, which includes multiple object classes beyond pedestrians, you need to retrain the YOLOX backbone for multi-class detection. 
+For **MOT16 benchmark**, you can use weights trained for MOT17 `bytetrack_x_mot17.pth.tar`. For the **FastTrack benchmark**, which includes multiple object classes beyond pedestrians, you need to retrain the YOLOX backbone for multi-class detection. 
 
 The FastTrack benchmark uses the standard MOT format, where each `gt/gt.txt` file already provides frame-level detections with object class annotations. To train a detector:
 
@@ -204,6 +204,20 @@ Number of frames an occluded object can remain unmatched before being marked as 
 * `init_iou_suppress`:
 IOU suppression threshold used to avoid initializing duplicate tracks from overlapping detections.
 
+### 📦 Output Structure 
+After running each .sh file (e.g., run_mot17.sh or run_mot20.sh), the full set of tracking results will be saved in:
+```shell
+./YOLOX_outputs/<EXPERIMENT_NAME>/runX/track_results/
+```
+
+* Each `runX` folder (e.g., `run000`, `run001`, ...) corresponds to a different config file in the `./configs` directory.
+
+* Inside each `track_results/` folder, you will find `.txt` result files for each video sequence.
+
+* These result files are already formatted in the standard MOT Challenge format and can be directly submitted to the MOT Challenge evaluation server.
+
+To reproduce the best performance reported in our paper and in MOT Challenge server, you need to tune the hyperparameters for each video sequence individually.
+This is done by editing the corresponding JSON config file in `./configs/` with sequence-specific values (e.g., `track_thresh`, `match_thresh`, etc.).
 
 ## Obtain MOTA /IDS/ HOTA and other evaluation
 
