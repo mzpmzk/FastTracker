@@ -380,14 +380,6 @@ class Fasttracker(object):
             lost_stracks.append(track)
             
 
-        # """ Step 4: Init new stracks"""
-        # for inew in u_detection:
-        #     track = detections[inew]
-        #     if track.score < self.det_thresh:
-        #         continue
-        #     track.activate(self.kalman_filter, self.frame_id)
-        #     activated_starcks.append(track)
-
         """ Step 4: Init new stracks (with IoU suppression) """
         # Gather active tracks *now* (already-updated ones + still-tracked ones)
         active_now = {t.track_id: t for t in self.tracked_stracks if t.state == TrackState.Tracked}
