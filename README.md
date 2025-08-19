@@ -116,17 +116,94 @@ The FastTrack benchmark uses the standard MOT format, where each `gt/gt.txt` fil
 
 This enables FastTracker to detect and track multiple object types effectively in complex traffic environments.
 
-## Tracking
 
-* **Evaluation on MOT17 and MOT20**
+## Tracking
 
 Run FastTracker:
 
-```shell
-cd <home>
-python tools\\track.py -f exps\\example\\mot\\yolox_x_mix_det.py -c pretrained/bytetrack_x_mot17.pth.tar -b 1 -d 1 --fp16 --fuse
-python tools\\track.py -f exps\\example\\mot\\yolox_x_mix_mot20_ch.py -c pretrained\\bytetrack_x_mot20.pth.tar -b 1 -d 1 --fp16 --fuse --match_thresh 0.7 --mot20
+To evaluate **FastTracker** on the **MOT17 benchmark** and **MOT20 benchmark**, simply run the following command:
+
+```bash
+bash run_mot17.sh
+bash run_mot20.sh
 ```
+For  **MOT16 benchmark** and **FatTracker benchmark**, you can use `bash run_mot17.sh`, but need to change the weight directory, experiment name and experiment file.
+
+### ⚙️ Understanding `run_mot17.sh` and `run_mot20.sh` Configuration:
+
+The `run_mot17.sh` script begins by defining a set of key variables that control the evaluation pipeline:
+
+```bash
+EXP_FILE="exps/example/xx"
+CKPT="pretrained/bytetrack_x_motxx.pth.tar"
+BATCH=1
+DEVICES=1
+EXPERIMENT_NAME="xx"
+OUTPUTS_ROOT="YOLOX_outputs"
+CONFIGS_DIR="./configs"
+```
+
+Here is the defenition of each variable:
+
+* `EXP_FILE`:
+Path to the YOLOX experiment definition file. This file specifies the model architecture, dataset format, and preprocessing.
+Example: `exps/example/mot/yolox_x_mix_det.py`.
+
+* `CKPT`:
+Path to the pretrained checkpoint file. For `MOT17` or `MOT20`, you must download the appropriate `.pth.tar` file from the ByteTrack repository
+ and place it under the `./pretrained/` directory.
+Examples: `pretrained/bytetrack_x_mot17.pth.tar` or `pretrained/bytetrack_x_mot20.pth.tar`
+
+* `BATCH`:
+The batch size used during inference. Typically set to `1` for tracking tasks.
+
+* `DEVICES`:
+Number of GPUs to use. Set to `1` for single-GPU setups. Can be increased for parallel evaluation.
+
+* `EXPERIMENT_NAME`:
+A unique name identifying the current experiment.
+The outputs (logs, tracking results, etc.) will be saved under `YOLOX_outputs/<EXPERIMENT_NAME>/`.
+
+* `OUTPUTS_ROOT`:
+The root directory where experiment outputs are saved.
+
+* `CONFIGS_DIR`:
+Directory containing multiple `.json` configuration files. Each config file defines tracking hyperparameters such as thresholds, buffer sizes, and occlusion handling settings.
+The script automatically runs tracking once per config file inside this folder.
+
+### 📄 Details of Tracking Configuration Files (./configs/*.json)
+Each JSON file inside the `./configs` directory specifies a different set of hyperparameters for tracking evaluation.
+
+* `track_thresh`:
+Minimum detection score for initializing or updating a track. Lowering this allows weaker detections to be considered.
+
+* `track_buffer`:
+Maximum number of frames a tracklet is kept alive without receiving a matching detection.
+
+* `match_thresh`:
+IOU threshold used for associating detections to existing tracklets.
+
+* `min_box_area`:
+Minimum area of bounding boxes to be considered for tracking. Useful for filtering out tiny detections.
+
+* `reset_velocity_offset_occ`:
+Velocity smoothing offset applied when a tracklet is marked as occluded. Higher values help reduce drift.
+
+* `reset_pos_offset_occ`:
+Position smoothing offset for occluded objects. Controls how much the predicted position can shift.
+
+* `enlarge_bbox_occ`:
+Factor to enlarge bounding boxes of occluded objects. Helps improve re-identification during reappearance.
+
+* `dampen_motion_occ`:
+Dampening factor for the velocity vector of occluded objects. Reduces aggressive forward prediction.
+
+* `active_occ_to_lost_thresh`:
+Number of frames an occluded object can remain unmatched before being marked as lost.
+
+* `init_iou_suppress`:
+IOU suppression threshold used to avoid initializing duplicate tracks from overlapping detections.
+
 
 ## Obtain MOTA /IDS/ HOTA and other evaluation
 
