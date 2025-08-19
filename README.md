@@ -1,5 +1,6 @@
 # FastTracker
 
+#### FastTracker is a real-Time and accurate visual tracking module.
 
 ## Installation on the host machine
 
