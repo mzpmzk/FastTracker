@@ -294,3 +294,16 @@ python tools/GSI.py \
 * The smoothed results will maintain `MOT` format, and can be used directly for evaluation.
 
 This post-processing step is optional and meant for offline use only — it is not applicable in real-time systems.
+
+## Demo
+
+![image](./figs/fasttrack_benchmark.jpg)
+
+Simply run:
+
+```bash
+python tools/demo_track.py video -f exps/example/mot/yolox_x_mix_det.py -c pretrained/bytetrack_x_mot17.pth.tar --fp16 --fuse --save_result
+```
+
+
+
