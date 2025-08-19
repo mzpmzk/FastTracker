@@ -21,7 +21,7 @@ FastTracker is a general-purpose multi-object tracking framework designed for co
 ## Resources
 | Huggingface Dataset | Paper |
 |:-----------------:|:-------:|
-|[![Hugging Face Spaces](https://img.shields.io/badge/HuggingFace-Dataset-blue)](https://huggingface.co/datasets/Hamidreza-Hashemp/FastTracker-Benchmark)|[arXiv ](xxx)
+|[![dataset](https://img.shields.io/badge/Models-5EDDD2?style=for-the-badge&logo=huggingface&logoColor=ffffff&labelColor)](https://huggingface.co/datasets/Hamidreza-Hashemp/FastTracker-Benchmark)|[![arXiv](https://img.shields.io/badge/Demo-FFB300?style=for-the-badge&logo=airplayvideo&logoColor=white)](xxx)
 
 
 
