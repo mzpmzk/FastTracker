@@ -31,15 +31,18 @@ FastTracker is a general-purpose multi-object tracking framework designed for co
 FastTrack-Benchmark is a high-density multi-object tracking benchmark tailored for complex urban traffic scenes. It features 800K annotations across 12 diverse scenarios with 9 object classes, offering over 5× higher object density than existing benchmarks—making it ideal for evaluating trackers under extreme occlusion, interaction, and scene variety.
 The Benchmark is public and available in our [**Huggingface Dataset**](https://huggingface.co/datasets/Hamidreza-Hashemp/FastTracker-Benchmark)
 
-![image](./figs/fasttrack_benchmark.jpg)
 
+<div align="center">
+  <img src="./figs/fasttrack_benchmark.jpg" alt="Image main" width="50%" style="margin: 1%;">
+</div>
 
 ## Framework
 
 Occlusion-aware tracking strategy framework that detects occluded tracklets based on center-proximity with nearby objects. Once detected, occluded tracklets are marked inactive, their motion is dampened to prevent drift, and their bounding boxes are slightly enlarged to aid re-identification. 
 
-
+<div align="center">
 <img src="./figs/fasttrack_occ_alg.jpg" alt="Occlusion Algorithm" style="width:70%;"/>
+</div>
 
 ## Tracking performance
 ### Results on MOT challenge test set
@@ -298,7 +301,11 @@ This post-processing step is optional and meant for offline use only — it is n
 
 ## Demo
 
-![image](./figs/fasttrack_occ_enlarge_bb.jpg)
+
+<div align="center">
+  <img src="./figs/fasttrack_occ_enlarge_bb.jpg" alt="Image main" width="50%" style="margin: 1%;">
+</div>
+
 
 Simply run:
 
