@@ -106,7 +106,7 @@ To use FastTracker's default models for MOT17 and MOT20 benchmarks, download the
 
 Place both files into the `./pretrained/` directory.
 
-For **MOT16 benchmark**, you can use weights trained for MOT17 `bytetrack_x_mot17.pth.tar`. For the **FastTrack benchmark**, which includes multiple object classes beyond pedestrians, you need to retrain the YOLOX backbone for multi-class detection. 
+For **MOT16 benchmark**, you can use weights trained for MOT17 `bytetrack_x_mot17.pth.tar`. For the **FastTrack benchmark**, which includes multiple object classes beyond pedestrians, you need to retrain the YOLOX for multi-class detection. 
 
 The FastTrack benchmark uses the standard MOT format, where each `gt/gt.txt` file already provides frame-level detections with object class annotations. To train a detector:
 
