@@ -1,6 +1,6 @@
 # FastTracker
 
-#### FastTracker is a real-Time and accurate visual tracking module.
+#### FastTracker is a real-Time and accurate visual tracking framework.
 
 <div align="center">
 
@@ -28,7 +28,7 @@ FastTracker is a general-purpose multi-object tracking framework designed for co
 
 
 ## Benchmark
-FastTrack is a high-density multi-object tracking benchmark tailored for complex urban traffic scenes. It features 800K annotations across 12 diverse scenarios with 9 object classes, offering over 5× higher object density than existing benchmarks—making it ideal for evaluating trackers under extreme occlusion, interaction, and scene variety.
+FastTrack-Benchmark is a high-density multi-object tracking benchmark tailored for complex urban traffic scenes. It features 800K annotations across 12 diverse scenarios with 9 object classes, offering over 5× higher object density than existing benchmarks—making it ideal for evaluating trackers under extreme occlusion, interaction, and scene variety.
 The Benchmark is public and available in our [**Huggingface Dataset**](https://huggingface.co/datasets/Hamidreza-Hashemp/FastTracker-Benchmark)
 
 ![image](./figs/fasttrack_benchmark.jpg)
