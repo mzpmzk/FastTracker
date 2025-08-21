@@ -316,7 +316,18 @@ python tools/demo_track.py video -f exps/example/mot/yolox_x_mix_det.py -c pretr
 ## Citation
 If you use our code or Benchmark, please cite our work.
 
-xxx
+
+```
+@misc{hashempoor2025fasttrackerrealtimeaccuratevisual,
+      title={FastTracker: Real-Time and Accurate Visual Tracking}, 
+      author={Hamidreza Hashempoor and Yu Dong Hwang},
+      year={2025},
+      eprint={2508.14370},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV},
+      url={https://arxiv.org/abs/2508.14370}, 
+}
+```
 
 ## Acknowledgement
 Our work is built upon [YOLOX](https://github.com/Megvii-BaseDetection/YOLOX), [ByteTrack](https://github.com/FoundationVision/ByteTrack/tree/main), [TransTrack](https://github.com/PeizeSun/TransTrack) and [TrackEval](https://github.com/JonathonLuiten/TrackEval). Highly appreciated!
