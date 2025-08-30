@@ -313,8 +313,8 @@ def imageflow_demo(predictor, vis_folder, current_time, args):
                     tlwh = t.tlwh
                     tid = t.track_id
 
-                    if tid != 8:
-                        continue
+                    # if tid != 8:
+                    #     continue
                     vertical = tlwh[2] / tlwh[3] > args.aspect_ratio_thresh
                     if tlwh[2] * tlwh[3] > args.min_box_area and not vertical:
                         online_tlwhs.append(tlwh)
